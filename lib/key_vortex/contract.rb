@@ -1,10 +1,31 @@
 # frozen_string_literal: true
 
-require_relative "contract/version"
+require "key_vortex/record"
+require "securerandom"
 
-module KeyVortex
-  module Contract
-    class Error < StandardError; end
-    # Your code goes here...
+class SampleRecord < KeyVortex::Record
+  field :sample, String, length: 10
+end
+
+RSpec.shared_context "an adapter" do
+  let(:store) do
+    KeyVortex.new(
+      subject,
+      SampleRecord
+    )
+  end
+
+  let(:record) do
+    SampleRecord.new(
+      key: SecureRandom.uuid,
+      sample: "foo"
+    )
+  end
+
+  it "stores and removes a key" do
+    store.save(record)
+    expect(store.find(record.key)).to eq(record)
+    subject.remove(record.key)
+    expect(store.find(record.key)).to be_nil
   end
 end

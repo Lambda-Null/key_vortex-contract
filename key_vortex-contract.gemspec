@@ -9,7 +9,9 @@ Gem::Specification.new do |spec|
   spec.email = ["lambda.null.42@gmail.com"]
 
   spec.summary = "Provide a contract that KeyVortex adapters must conform"
-  spec.description = "Provides a portable suite of tests that can be dropped into any KeyVortex implementation so that functionality built on top of them can make certain assumptions"
+  spec.description = "Provides a portable suite of tests that can be dropped " \
+                     "into any KeyVortex implementation so that functionality " \
+                     "built on top of them can make certain assumptions"
   spec.homepage = "https://github.com/Lambda-Null/key_vortex-contract"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 2.6.0"
@@ -33,4 +35,5 @@ Gem::Specification.new do |spec|
 
   # For more information and examples about making a new gem, checkout our
   # guide at: https://bundler.io/guides/creating_gem.html
+  spec.metadata["rubygems_mfa_required"] = "true"
 end

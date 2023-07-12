@@ -43,15 +43,15 @@ RSpec.shared_context "an adapter" do
   end
 
   it "stores and removes a key" do
-    store.save(record)
-    expect(store.find(record.key)).to eq(record)
-    subject.remove(record.key)
-    expect(store.find(record.key)).to be_nil
+    store.save(record1)
+    expect(store.find(record1.key)).to eq(record1)
+    subject.remove(record1.key)
+    expect(store.find(record1.key)).to be_nil
   end
 
   it "recreates the class that was provided" do
-    store.save(record.key)
-    expect(store.find(record.key)).to be_a(SampleRecord)
+    store.save(record1.key)
+    expect(store.find(record1.key)).to be_a(SampleRecord)
     store.save(record2)
     expect(store.find(record2.key)).to be_a(SampleRecordTwo)
   end

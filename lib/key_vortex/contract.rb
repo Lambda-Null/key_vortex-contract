@@ -7,7 +7,20 @@ class SampleRecord < KeyVortex::Record
   field :sample, String, length: 10
 end
 
+class SampleRecordTwo < KeyVortex::Record
+  field :sample, String, length: 10
+end
+
+require "rantly/rspec_extensions"
+
 RSpec.shared_context "an adapter" do
+  around(:each) do |s|
+    property_of { string }.check(100) do |sample|
+      @sample = sample
+      s.run
+    end
+  end
+
   let(:store) do
     KeyVortex.new(
       subject,
@@ -15,10 +28,17 @@ RSpec.shared_context "an adapter" do
     )
   end
 
-  let(:record) do
+  let(:record1) do
     SampleRecord.new(
       key: SecureRandom.uuid,
-      sample: "foo"
+      sample: @sample
+    )
+  end
+
+  let(:record2) do
+    SampleRecordTwo.new(
+      key: SecureRandom.uuid,
+      sample: @sample
     )
   end
 
@@ -27,5 +47,12 @@ RSpec.shared_context "an adapter" do
     expect(store.find(record.key)).to eq(record)
     subject.remove(record.key)
     expect(store.find(record.key)).to be_nil
+  end
+
+  it "recreates the class that was provided" do
+    store.save(record.key)
+    expect(store.find(record.key)).to be_a(SampleRecord)
+    store.save(record2)
+    expect(store.find(record2.key)).to be_a(SampleRecordTwo)
   end
 end

@@ -16,3 +16,8 @@ Layout/LineLength:
 Style/Documentation:
   AllowedConstants:
     - SampleRecord
+    - SampleRecordTwo
+
+Metrics/BlockLength:
+  AllowedMethods:
+    - shared_context

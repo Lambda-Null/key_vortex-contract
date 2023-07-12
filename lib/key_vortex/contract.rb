@@ -50,7 +50,7 @@ RSpec.shared_context "an adapter" do
   end
 
   it "recreates the class that was provided" do
-    store.save(record1.key)
+    store.save(record1)
     expect(store.find(record1.key)).to be_a(SampleRecord)
     store.save(record2)
     expect(store.find(record2.key)).to be_a(SampleRecordTwo)

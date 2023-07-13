@@ -42,6 +42,11 @@ RSpec.shared_context "an adapter" do
     )
   end
 
+  it "registers a symbol on KeyVortex" do
+    vortex = KeyVortex.vortex(described_class.symbol, SampleRecord)
+    expect(vortex.adapter).to be_a(described_class)
+  end
+
   it "stores and removes a key" do
     store.save(record1)
     expect(store.find(record1.key)).to eq(record1)

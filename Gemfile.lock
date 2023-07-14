@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    key_vortex-contract (0.2.4)
+    key_vortex-contract (0.2.5)
       rantly (~> 2.0.0)
       rspec (~> 3.0)
 

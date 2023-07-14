@@ -13,7 +13,7 @@ end
 
 require "rantly/rspec_extensions"
 
-RSpec.shared_context "an adapter" do
+RSpec.shared_context "an adapter" do |build_args = {}|
   around(:each) do |s|
     property_of { string }.check(100) do |sample|
       @sample = sample
@@ -43,7 +43,7 @@ RSpec.shared_context "an adapter" do
   end
 
   it "registers a symbol on KeyVortex" do
-    vortex = KeyVortex.vortex(described_class.symbol, SampleRecord)
+    vortex = KeyVortex.vortex(described_class.symbol, SampleRecord, **build_args)
     expect(vortex.adapter).to be_a(described_class)
   end
 

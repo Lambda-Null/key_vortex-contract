@@ -13,7 +13,7 @@ end
 
 require "rantly/rspec_extensions"
 
-RSpec.shared_context "an adapter" do |build_args = {}|
+RSpec.shared_examples "an adapter" do |build_args = {}|
   around(:each) do |s|
     property_of { string }.check(100) do |sample|
       @sample = sample

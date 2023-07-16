@@ -1,8 +1,6 @@
 # KeyVortex::Contract
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/key_vortex/contract`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Adapters built for [KeyVortex](https://github.com/lambda-Null/key-vortex/) must conform to a common set of behaviors in order to play nicely together. This gem provides [shared examples](https://rubydoc.info/gems/key_vortex-contract/KeyVortex/Contract) that can be included in your tests to verify that you support these behaviors.
 
 ## Installation
 
@@ -22,7 +20,16 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Within the RSpec tests for your adapter subclass, you can include the contract like this:
+
+```ruby
+require "key_vortex/constract"
+
+RSpec.describe KeyVortex::Adapter::SomethingAwesome do
+  subject { KeyVortex::Adapter::SomethingAwesome.new() }
+  it_behaves_like "an adapter"
+end
+```
 
 ## Development
 
